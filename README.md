@@ -135,12 +135,43 @@ http://<RASPBERRY_PI_IP>:8000
 
 ```text
 myfest/
-├── backend/
-├── frontend/
-├── docs/
 ├── docker-compose.yml
-├── install.sh
-└── README.md
+├── Dockerfile
+├── .env.example
+├── .gitignore
+├── requirements.txt
+├── manage.py
+├── myfest/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── apps/
+    ├── accounts/
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── models.py
+    │   ├── forms.py
+    │   ├── views.py
+    │   ├── urls.py
+    │   └── templates/
+    │       └── accounts/
+    │           ├── login.html
+    │           ├── register.html
+    │           └── dashboard.html
+    └── events/
+        ├── __init__.py
+        ├── admin.py
+        ├── models.py
+        ├── views.py
+        ├── urls.py
+        └── templates/
+            └── events/
+                ├── event_list.html
+                ├── event_detail.html
+                ├── shift_list.html
+                └── shift_detail.html
+
 ```
 
 ---
