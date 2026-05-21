@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Dashboard – MyFest{% endblock %}
+{% block content %}
+<h2>👋 Hallo, {{ user.first_name|default:user.username }}!</h2>
+<p class="text-muted">Rolle: <strong>{{ user.get_role_display }}</strong></p>
+
+<hr>
+
+<h4>🕒 Meine Schichten</h4>
+{% if assignments %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Schicht</th>
+                <th>Start</th>
+                <th>Ende</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in assignments %}
+            <tr>
+                <td>{{ a.shift.event.name }}</td>
+                <td>{{ a.shift.title }}</td>
+                <td>{{ a.shift.start_time|date:"d.m.Y H:i" }}</td>
+                <td>{{ a.shift.end_time|date:"H:i" }}</td>
+                <td>
+                    {% if a.status == "confirmed" %}
+                        <span class="badge bg-success">Bestätigt</span>
+                    {% elif a.status == "waitlist" %}
+                        <span class="badge bg-warning text-dark">Warteliste</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Abgesagt</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="post" action="{% url 'shift_cancel' a.shift.pk %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Wirklich stornieren?')">Absagen</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-muted">Du hast dich noch für keine Schicht angemeldet.</p>
+{% endif %}
+
+<a href="{% url 'event_list' %}" class="btn btn-primary mt-2">🎪 Alle Events ansehen</a>
+{% endblock %}
