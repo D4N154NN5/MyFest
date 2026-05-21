@@ -87,6 +87,7 @@ cd myfest
 
 ```bash
 cp .env.example .env
+nano .env   # SECRET_KEY und Passwörter anpassen
 ```
 
 ---
