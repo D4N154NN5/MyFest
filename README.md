@@ -78,7 +78,7 @@ MyFest hilft bei der Organisation von Teams, Helfern und Schichten – inklusive
 ```bash
 git clone https://github.com/D4N154NN5/MyFest.git
 
-cd myfest
+cd MyFest
 ```
 
 ---
